@@ -1,5 +1,9 @@
 package net.blay09.mods.craftingtweaks;
 
+import static net.blay09.mods.craftingtweaks.EnumTweakAction.Balance;
+import static net.blay09.mods.craftingtweaks.EnumTweakAction.Clear;
+import static net.blay09.mods.craftingtweaks.EnumTweakAction.Rotate;
+
 import net.blay09.mods.craftingtweaks.api.DefaultProvider;
 import net.blay09.mods.craftingtweaks.api.DefaultProviderV2;
 import net.blay09.mods.craftingtweaks.api.InternalMethods;
@@ -40,19 +44,19 @@ public class InternalMethodsImpl implements InternalMethods {
     @Override
     @SideOnly(Side.CLIENT)
     public GuiButton createBalanceButton(int id, GuiContainer parentGui, int x, int y) {
-        return new GuiTweakButton(parentGui, x, y, 48, 0, GuiTweakButton.TweakOption.Balance, id);
+        return new GuiTweakButton(parentGui, x, y, 48, 0, Balance, id);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public GuiButton createRotateButton(int id, GuiContainer parentGui, int x, int y) {
-        return new GuiTweakButton(parentGui, x, y, 16, 0, GuiTweakButton.TweakOption.Rotate, id);
+        return new GuiTweakButton(parentGui, x, y, 16, 0, Rotate, id);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public GuiButton createClearButton(int id, GuiContainer parentGui, int x, int y) {
-        return new GuiTweakButton(parentGui, x, y, 32, 0, GuiTweakButton.TweakOption.Clear, id);
+        return new GuiTweakButton(parentGui, x, y, 32, 0, Clear, id);
     }
 
 }

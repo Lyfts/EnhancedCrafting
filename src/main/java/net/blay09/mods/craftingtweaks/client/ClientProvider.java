@@ -9,7 +9,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.*;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 
@@ -346,9 +348,10 @@ public class ClientProvider {
         }
         getController().windowClick(container.windowId, mouseSlot.slotNumber, 0, 0, entityPlayer);
         getController().windowClick(container.windowId, start, 0, 0, entityPlayer);
-        for (Slot obj : container.inventorySlots) {
-            if (obj instanceof SlotCrafting && obj.getHasStack()) {
-                getController().windowClick(container.windowId, obj.slotNumber, 0, decompressAll ? 1 : 0, entityPlayer);
+        for (Slot slot : container.inventorySlots) {
+            if (slot instanceof SlotCrafting && slot.getHasStack()) {
+                getController()
+                    .windowClick(container.windowId, slot.slotNumber, 0, decompressAll ? 1 : 0, entityPlayer);
                 break;
             }
         }
@@ -358,10 +361,16 @@ public class ClientProvider {
     }
 
     public void compress(TweakProvider provider, EntityPlayer entityPlayer, Container container, Slot mouseSlot,
-        boolean compressAll) {
+        boolean compressAll, boolean reverse) {
         if (!mouseSlot.getHasStack() || !canClear(provider, entityPlayer, container, 0)) {
             return;
         }
+
+        if (reverse) {
+            decompress(provider, entityPlayer, container, mouseSlot, compressAll);
+            return;
+        }
+
         clearGrid(provider, entityPlayer, container, 0, false);
         int start = provider.getCraftingGridStart(entityPlayer, container, 0);
         int size = provider.getCraftingGridSize(entityPlayer, container, 0);

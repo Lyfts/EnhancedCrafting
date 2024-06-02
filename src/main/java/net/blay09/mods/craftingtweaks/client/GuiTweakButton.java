@@ -2,6 +2,7 @@ package net.blay09.mods.craftingtweaks.client;
 
 import java.util.List;
 
+import net.blay09.mods.craftingtweaks.EnumTweakAction;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -10,27 +11,21 @@ import net.minecraft.util.EnumChatFormatting;
 
 public class GuiTweakButton extends GuiImageButton implements ITooltipProvider {
 
-    public enum TweakOption {
-        Rotate,
-        Balance,
-        Clear
-    }
-
-    private final TweakOption tweakOption;
+    private final EnumTweakAction tweakOption;
     private final int tweakId;
     private final GuiContainer parentGui;
     private int lastGuiLeft;
     private int lastGuiTop;
 
     public GuiTweakButton(GuiContainer parentGui, int xPosition, int yPosition, int texCoordX, int texCoordY,
-        TweakOption tweakOption, int tweakId) {
+        EnumTweakAction tweakOption, int tweakId) {
         super(-1, xPosition, yPosition, texCoordX, texCoordY);
         this.parentGui = parentGui;
         this.tweakOption = tweakOption;
         this.tweakId = tweakId;
     }
 
-    public TweakOption getTweakOption() {
+    public EnumTweakAction getTweakOption() {
         return tweakOption;
     }
 

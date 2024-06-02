@@ -283,12 +283,7 @@ public class CraftingTweaks {
     }
 
     public ModSupportState getModSupportState(String modId) {
-        ModSupportState suportState = configMap.get(modId);
-        if (suportState == null) {
-            suportState = ModSupportState.ENABLED;
-            configMap.put(modId, suportState);
-        }
-        return suportState;
+        return configMap.computeIfAbsent(modId, k -> ModSupportState.ENABLED);
     }
 
     public static void saveConfig() {
@@ -308,20 +303,5 @@ public class CraftingTweaks {
 
     private static boolean getBoolOr(NBTTagCompound tagCompound, String key, boolean defaultVal) {
         return (tagCompound.hasKey(key) ? tagCompound.getBoolean(key) : defaultVal);
-    }
-
-    @SideOnly(Side.CLIENT)
-    public static boolean onGuiClick(int mouseX, int mouseY, int button) {
-        if (Mouse.getEventButtonState()) {
-            GuiClickEvent event = new GuiClickEvent(
-                FMLClientHandler.instance()
-                    .getClient().currentScreen,
-                mouseX,
-                mouseY,
-                button);
-            MinecraftForge.EVENT_BUS.post(event);
-            return event.isCanceled();
-        }
-        return false;
     }
 }
