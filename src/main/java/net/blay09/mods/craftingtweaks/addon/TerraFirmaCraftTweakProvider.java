@@ -1,8 +1,12 @@
 package net.blay09.mods.craftingtweaks.addon;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.blay09.mods.craftingtweaks.api.*;
+import java.util.List;
+
+import net.blay09.mods.craftingtweaks.api.CraftingTweaksAPI;
+import net.blay09.mods.craftingtweaks.api.DefaultProviderV2;
+import net.blay09.mods.craftingtweaks.api.RotationHandler;
+import net.blay09.mods.craftingtweaks.api.TweakProvider;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -11,13 +15,15 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import java.util.List;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class TerraFirmaCraftTweakProvider implements TweakProvider {
 
     private final DefaultProviderV2 defaultProvider = CraftingTweaksAPI.createDefaultProviderV2();
 
     private final RotationHandler smallRotationHandler = new RotationHandler() {
+
         @Override
         public boolean ignoreSlotId(int slotId) {
             return false;
@@ -25,7 +31,7 @@ public class TerraFirmaCraftTweakProvider implements TweakProvider {
 
         @Override
         public int rotateSlotId(int slotId, boolean counterClockwise) {
-            if(!counterClockwise) {
+            if (!counterClockwise) {
                 switch (slotId) {
                     case 0:
                         return 1;
@@ -37,11 +43,15 @@ public class TerraFirmaCraftTweakProvider implements TweakProvider {
                         return 2;
                 }
             } else {
-                switch(slotId) {
-                    case 1: return 0;
-                    case 3: return 1;
-                    case 0: return 2;
-                    case 2: return 3;
+                switch (slotId) {
+                    case 1:
+                        return 0;
+                    case 3:
+                        return 1;
+                    case 0:
+                        return 2;
+                    case 2:
+                        return 3;
                 }
             }
             return 0;
@@ -104,19 +114,31 @@ public class TerraFirmaCraftTweakProvider implements TweakProvider {
     }
 
     @Override
-    public ItemStack putIntoGrid(EntityPlayer entityPlayer, Container container, int id, ItemStack itemStack, int index) {
+    public ItemStack putIntoGrid(EntityPlayer entityPlayer, Container container, int id, ItemStack itemStack,
+        int index) {
         return defaultProvider.putIntoGrid(this, id, entityPlayer, container, itemStack, index);
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     @SideOnly(Side.CLIENT)
-    public void initGui(GuiContainer guiContainer, List buttonList) {
+    public void initGui(GuiContainer guiContainer, List<GuiButton> buttonList) {
         final int paddingLeft = 1;
         final int paddingTop = -16;
-        buttonList.add(CraftingTweaksAPI.createRotateButton(0, guiContainer.guiLeft + guiContainer.xSize / 2 + paddingLeft, guiContainer.guiTop + paddingTop));
-        buttonList.add(CraftingTweaksAPI.createBalanceButton(0, guiContainer.guiLeft + guiContainer.xSize / 2 + paddingLeft + 18, guiContainer.guiTop + paddingTop));
-        buttonList.add(CraftingTweaksAPI.createClearButton(0, guiContainer.guiLeft + guiContainer.xSize / 2 + paddingLeft + 36, guiContainer.guiTop + paddingTop));
+        buttonList.add(
+            CraftingTweaksAPI.createRotateButton(
+                0,
+                guiContainer.guiLeft + guiContainer.xSize / 2 + paddingLeft,
+                guiContainer.guiTop + paddingTop));
+        buttonList.add(
+            CraftingTweaksAPI.createBalanceButton(
+                0,
+                guiContainer.guiLeft + guiContainer.xSize / 2 + paddingLeft + 18,
+                guiContainer.guiTop + paddingTop));
+        buttonList.add(
+            CraftingTweaksAPI.createClearButton(
+                0,
+                guiContainer.guiLeft + guiContainer.xSize / 2 + paddingLeft + 36,
+                guiContainer.guiTop + paddingTop));
     }
 
     @Override

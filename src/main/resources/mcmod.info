@@ -1,16 +1,21 @@
-[
 {
-  "modid": "craftingtweaks",
-  "name": "Crafting Tweaks",
-  "description": "Allows you to rotate or clear the crafting matrix by the press of a button, in any (supported) crafting window.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
-  "authorList": ["BlayTheNinth"],
-  "credits": "BlayTheNinth",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
+  "modListVersion": 2,
+  "modList": [{
+    "modid": "${modId}",
+    "name": "${modName}",
+    "description": "Allows you to rotate or clear the crafting matrix by the press of a button, in any (supported) crafting window.",
+    "version": "${modVersion}",
+    "mcversion": "${minecraftVersion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["BlayTheNinth"],
+    "credits": "BlayTheNinth",
+    "logoFile": "",
+    "screenshots": [],
+    "parent": "",
+    "requiredMods": [],
+    "dependencies": [],
+    "dependants": [],
+    "useDependencyInformation": true
+  }]
 }
-]
